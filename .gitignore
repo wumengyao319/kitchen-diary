@@ -1,0 +1,13 @@
+# ===== 美食食谱 · Git 忽略规则 =====
+
+# 微信开发者工具本地配置
+project.private.config.json
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日志与临时
+*.log
+node_modules/
