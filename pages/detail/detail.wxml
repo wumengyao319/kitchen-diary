@@ -1,7 +1,9 @@
 <scroll-view scroll-y class="detail-scroll">
   <view class="recipe-header">
     <view class="recipe-image" style="background: linear-gradient(135deg, {{recipe.color}}, {{recipe.color}}88)">
-      <text class="recipe-emoji">{{recipe.emoji}}</text>
+      <image wx:if="{{recipe.img}}" class="recipe-img" src="{{recipe.img}}" mode="aspectFill" />
+      <text wx:else class="recipe-emoji">{{recipe.emoji}}</text>
+      <text class="img-ai-tag" wx:if="{{recipe.img}}">AI 示意图</text>
     </view>
     <view class="recipe-info">
       <text class="recipe-name">{{recipe.name}}</text>

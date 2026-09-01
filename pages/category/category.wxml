@@ -35,7 +35,8 @@
           data-id="{{item._id}}"
         >
           <view class="recipe-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}cc)">
-            <text class="recipe-emoji">{{item.emoji}}</text>
+            <image wx:if="{{item.img}}" class="recipe-img" src="{{item.img}}" mode="aspectFill" />
+            <text wx:else class="recipe-emoji">{{item.emoji}}</text>
           </view>
           <view class="recipe-info">
             <text class="recipe-name">{{item.name}}</text>
