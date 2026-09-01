@@ -107,7 +107,7 @@ Page({
   },
 
   loadFavorites: function() {
-    const recipesData = require('../data/recipes.js')
+    const recipesData = require('../../data/recipes.js')
     const favoriteIds = wx.getStorageSync('favorites') || []
     const allRecipes = recipesData.recipes || []
     

@@ -48,7 +48,17 @@ Page({
     })
   },
 
-  goCategory: function() {
+  goFridge: function() {
+    wx.navigateTo({ url: '/pages/fridge/fridge' })
+  },
+
+  goShopping: function() {
+    wx.navigateTo({ url: '/pages/shopping/shopping' })
+  },
+
+  goCategory: function(e) {
+    const name = e && e.currentTarget && e.currentTarget.dataset.name
+    if (name) { wx.navigateTo({ url: '/pages/category/category?name=' + name }); return }
     wx.switchTab({
       url: '/pages/category/category'
     })
