@@ -1,0 +1,66 @@
+<view class="scroll-page">
+  <view class="page-inner">
+
+    <!-- 厨房手账摘要（灶火 + 味觉版图） -->
+    <view class="journal-card">
+      <view class="journal-head">
+        <view class="journal-title">🔥 厨房手账</view>
+        <view class="journal-sub">已做 {{cookedCount}} 道菜</view>
+      </view>
+      <view class="stove-line" wx:if="{{stoveDays > 0}}">🔥 灶火不熄 · 连做 <text class="stove-num">{{stoveDays}}</text> 天</view>
+      <view class="stove-line muted" wx:else>灶火未燃 · 做一道菜点亮它</view>
+      <view class="cuisine-row" wx:if="{{cuisineMap.length}}">
+        <view class="cuisine-item" wx:for="{{cuisineMap}}" wx:key="name">
+          <view class="cuisine-name">{{item.name}}</view>
+          <view class="cuisine-bar">
+            <view class="cuisine-fill" style="width: {{item.pct}}%"></view>
+          </view>
+          <view class="cuisine-count">{{item.count}} 道</view>
+        </view>
+      </view>
+      <view class="journal-tip">打开一道菜谱 → 点「今天做了这道菜」即可打卡</view>
+    </view>
+
+    <!-- 冰箱食材勾选 -->
+    <view class="fridge-card">
+      <view class="fridge-head">
+        <view class="fridge-title">🧊 冰箱里有什么？</view>
+        <view class="fridge-clear" bindtap="clearAll" wx:if="{{selectedNames.length}}">清空</view>
+      </view>
+      <view class="fridge-tip">勾选现有食材，匹配出今天能做的菜</view>
+
+      <view class="ing-group" wx:for="{{groups}}" wx:key="group">
+        <view class="ing-group-name">{{item.group}}</view>
+        <view class="ing-items">
+          <view
+            class="ing-chip {{item2.on ? 'on' : ''}}"
+            wx:for="{{item.items}}"
+            wx:for-item="item2"
+            wx:key="name"
+            data-name="{{item2.name}}"
+            bindtap="toggleIngredient"
+          >{{item2.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 匹配结果 -->
+    <view class="match-card" wx:if="{{hasSearched}}">
+      <view class="match-title">今天能做（{{matched.length}} 道）</view>
+      <view class="match-empty" wx:if="{{!matched.length}}">勾选的食材组合暂无匹配菜谱，再加一两样试试</view>
+      <view class="match-item" wx:for="{{matched}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <view class="match-icon" style="background: {{item.color}}22">{{item.emoji}}</view>
+        <view class="match-main">
+          <view class="match-name">{{item.name}} <text class="match-cat">{{item.category}} · {{item.cookTime}}</text></view>
+          <view class="match-bar">
+            <view class="match-fill" style="width: {{item.matchRate}}%"></view>
+          </view>
+          <view class="match-own">有：{{item.ownedText}}</view>
+          <view class="match-missing" wx:if="{{item.missingText !== '全部齐了'}}">还缺：{{item.missingText}}</view>
+        </view>
+        <view class="match-rate">{{item.matchRate}}%</view>
+      </view>
+    </view>
+
+  </view>
+</view>

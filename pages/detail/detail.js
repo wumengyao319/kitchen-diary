@@ -23,6 +23,60 @@ Page({
     if (currentPage.options && currentPage.options.id) {
       this.loadRecipe(currentPage.options.id)
     }
+    this.checkCooked(this.data.recipe._id)
+  },
+
+  // 「今天做了这道菜」打卡：记入厨房手账（与冰箱页的灶火/味觉版图联动）
+  markCooked: function() {
+    const recipe = this.data.recipe
+    if (!recipe || !recipe._id) return
+    const self = this
+    wx.showModal({
+      title: '今天做了这道菜？',
+      editable: true,
+      placeholderText: '记一句心得（选填），如：火候刚好',
+      success: function(res) {
+        if (!res.confirm) return
+        const d = new Date()
+        const date = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')
+        const log = wx.getStorageSync('cookedLog') || []
+        log.unshift({
+          recipeId: recipe._id,
+          name: recipe.name,
+          category: recipe.category,
+          date,
+          note: res.content || ''
+        })
+        wx.setStorageSync('cookedLog', log)
+        self.checkCooked(recipe._id)
+        wx.showToast({ title: '已记入厨房手账', icon: 'success' })
+      }
+    })
+  },
+
+  checkCooked: function(recipeId) {
+    if (!recipeId) return
+    const log = wx.getStorageSync('cookedLog') || []
+    const count = log.filter(item => item.recipeId === recipeId).length
+    this.setData({ cookedCount: count })
+  },
+
+  // 食材加入购物清单（逐项入单，买菜时勾选）
+  addIngredientsToShopping: function() {
+    const recipe = this.data.recipe
+    if (!recipe || !recipe.ingredients || !recipe.ingredients.length) return
+    const list = wx.getStorageSync('shoppingList') || []
+    let added = 0
+    recipe.ingredients.forEach(item => {
+      const name = item.name + (item.amount ? ' ' + item.amount : '')
+      const exists = list.some(i => i.name === name)
+      if (!exists) {
+        list.unshift({ id: 'sl_' + Date.now() + '_' + added, name, checked: false })
+        added++
+      }
+    })
+    wx.setStorageSync('shoppingList', list)
+    wx.showToast(added ? { title: '已加入购物清单（' + added + ' 样）', icon: 'success' } : { title: '清单里都有了', icon: 'none' })
   },
 
   loadRecipe: function(id) {

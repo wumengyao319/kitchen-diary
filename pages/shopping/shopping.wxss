@@ -1,0 +1,48 @@
+/* pages/shopping/shopping.wxss - 购物清单 */
+.scroll-page { min-height: 100vh; background: #fff7f2; }
+.page-inner { padding: 24rpx; }
+.shop-card {
+  background: #fff;
+  border: 2rpx solid #f5e0d4;
+  border-radius: 20rpx;
+  padding: 24rpx;
+}
+.shop-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8rpx; }
+.shop-title { font-size: 30rpx; font-weight: bold; color: #2a2825; }
+.shop-clear { font-size: 24rpx; color: #ff6b6b; }
+.shop-summary { font-size: 22rpx; color: #999; margin-bottom: 18rpx; }
+.shop-empty { text-align: center; padding: 40rpx 20rpx; }
+.shop-empty-icon { font-size: 60rpx; margin-bottom: 12rpx; }
+.shop-empty-text { font-size: 24rpx; color: #999; line-height: 1.7; display: block; }
+.shop-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 8rpx;
+  border-bottom: 2rpx dashed #f0e0d2;
+}
+.shop-item:last-of-type { border-bottom: none; }
+.shop-check {
+  width: 40rpx; height: 40rpx;
+  border-radius: 50%;
+  border: 3rpx solid #e0d5c5;
+  color: #ff6b6b;
+  font-weight: bold;
+  text-align: center;
+  line-height: 34rpx;
+  flex: none;
+  margin-right: 18rpx;
+  font-size: 24rpx;
+}
+.shop-item.done .shop-check { background: #ff6b6b; border-color: #ff6b6b; color: #fff; }
+.shop-item.done .shop-name { text-decoration: line-through; color: #bbb; }
+.shop-name { flex: 1; font-size: 27rpx; color: #2a2825; }
+.shop-del { color: #ccc; font-size: 28rpx; padding: 6rpx 10rpx; }
+.shop-add {
+  margin-top: 18rpx;
+  text-align: center;
+  font-size: 25rpx;
+  color: #b3591f;
+  border: 2rpx dashed #e0d5c5;
+  border-radius: 12rpx;
+  padding: 16rpx;
+}

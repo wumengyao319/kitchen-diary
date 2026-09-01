@@ -221,3 +221,25 @@ page {
   color: #ffffff;
   font-weight: bold;
 }
+/* 购物清单入口 + 打卡行 */
+.shopping-add {
+  margin-top: 16rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #b3591f;
+  background: #fdf6ee;
+  border: 2rpx dashed #e0d5c5;
+  border-radius: 12rpx;
+  padding: 14rpx;
+}
+.cooked-line {
+  margin-bottom: 20rpx;
+  padding: 16rpx 20rpx;
+  background: linear-gradient(90deg, #fff7f2, #fdf6ee);
+  border-radius: 12rpx;
+}
+.cooked-mark {
+  font-size: 24rpx;
+  color: #b3591f;
+}
+

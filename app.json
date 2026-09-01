@@ -6,6 +6,8 @@
     "pages/dynamic/dynamic",
     "pages/search/search",
     "pages/lucky/lucky",
+    "pages/fridge/fridge",
+    "pages/shopping/shopping",
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/dynamic-likes/dynamic-likes",

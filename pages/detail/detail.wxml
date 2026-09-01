@@ -38,9 +38,14 @@
         <text class="ingredient-amount">{{item.amount}}</text>
       </view>
     </view>
+    <view class="shopping-add" bindtap="addIngredientsToShopping">🧺 全部食材加入购物清单</view>
   </view>
 
   <view class="section">
+    <view class="cooked-line" bindtap="markCooked">
+      <text class="cooked-mark">{{cookedCount ? '已做 ' + cookedCount + ' 次 · ' : ''}}今天做了这道菜？点这里记入厨房手账</text>
+    </view>
+    <view class="section">
     <view class="section-header">
       <text class="section-title">烹饪步骤</text>
       <text class="section-count">{{recipe.steps && recipe.steps.length || 0}}步</text>

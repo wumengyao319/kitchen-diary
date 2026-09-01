@@ -1,0 +1,24 @@
+<view class="scroll-page">
+  <view class="page-inner">
+    <view class="shop-card">
+      <view class="shop-head">
+        <view class="shop-title">🧺 购物清单</view>
+        <view class="shop-clear" bindtap="clearDone" wx:if="{{doneCount > 0}}">清掉已买</view>
+      </view>
+      <view class="shop-summary">{{leftCount}} 样待买 · 已买 {{doneCount}} 样</view>
+
+      <view class="shop-empty" wx:if="{{!items.length}}">
+        <view class="shop-empty-icon">🧺</view>
+        <text class="shop-empty-text">清单空空的。在菜谱详情页点「食材加入购物清单」，买菜时一键勾选。</text>
+      </view>
+
+      <view class="shop-item {{item.checked ? 'done' : ''}}" wx:for="{{items}}" wx:key="id">
+        <view class="shop-check" bindtap="toggleItem" data-id="{{item.id}}">{{item.checked ? '✓' : ''}}</view>
+        <view class="shop-name">{{item.name}}</view>
+        <view class="shop-del" bindtap="removeItem" data-id="{{item.id}}">✕</view>
+      </view>
+
+      <view class="shop-add" bindtap="addItem">＋ 手动添加食材</view>
+    </view>
+  </view>
+</view>
