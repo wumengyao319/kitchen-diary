@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="header">
+    <text class="back-btn" bindtap="goBack">‹</text>
+    <text class="header-title">我的菜谱点赞</text>
+    <text class="placeholder"></text>
+  </view>
+  <scroll-view class="list" scroll-y>
+    <view class="list-item" wx:for="{{list}}" wx:key="_id" bindtap="goDetail" data-id="{{item._id}}">
+      <view class="item-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}cc)">
+        <text class="image-emoji">{{item.emoji}}</text>
+      </view>
+      <view class="item-content">
+        <text class="item-title">{{item.name}}</text>
+        <text class="item-meta">{{item.category}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

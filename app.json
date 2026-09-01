@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/category/category",
+    "pages/dynamic/dynamic",
+    "pages/search/search",
+    "pages/lucky/lucky",
+    "pages/profile/profile",
+    "pages/detail/detail",
+    "pages/dynamic-likes/dynamic-likes",
+    "pages/dynamic-favorites/dynamic-favorites",
+    "pages/recipe-likes/recipe-likes",
+    "pages/recipe-favorites/recipe-favorites",
+    "pages/following/following",
+    "pages/followers/followers"
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#ff6b6b",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "菜类"
+      },
+      {
+        "pagePath": "pages/dynamic/dynamic",
+        "text": "动态"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜菜"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "美食食谱",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f5f5"
+  },
+  "sitemapLocation": "sitemap.json"
+}

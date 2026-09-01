@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="header-title">菜类</text>
+  </view>
+  <view class="content-wrapper">
+    <view class="category-sidebar">
+      <view 
+        class="sidebar-item {{currentCategory === item.name ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="name"
+        bindtap="selectCategory"
+        data-name="{{item.name}}"
+      >
+        <text class="sidebar-icon">{{item.icon}}</text>
+        <text class="sidebar-name">{{item.name}}</text>
+      </view>
+    </view>
+    
+    <view class="recipe-content">
+    <view class="content-header">
+      <text class="content-title">{{currentCategory}}</text>
+      <text class="content-count">{{currentRecipes.length}}个菜品</text>
+    </view>
+    
+    <scroll-view class="recipe-scroll" scroll-y>
+      <view class="recipe-list">
+        <view 
+          class="recipe-card" 
+          wx:for="{{currentRecipes}}" 
+          wx:key="_id"
+          bindtap="goDetail"
+          data-id="{{item._id}}"
+        >
+          <view class="recipe-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}cc)">
+            <text class="recipe-emoji">{{item.emoji}}</text>
+          </view>
+          <view class="recipe-info">
+            <text class="recipe-name">{{item.name}}</text>
+            <text class="recipe-desc">{{item.desc}}</text>
+            <view class="recipe-meta">
+              <text class="meta-item">{{item.category}}</text>
+              <text class="meta-item">{{item.cookTime}}</text>
+              <text class="meta-item difficulty {{item.difficulty === '简单' ? 'easy' : item.difficulty === '中等' ? 'medium' : 'hard'}}">{{item.difficulty}}</text>
+            </view>
+          </view>
+          <view class="recipe-actions">
+            <text class="arrow-icon">›</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    </view>
+  </view>
+</view>

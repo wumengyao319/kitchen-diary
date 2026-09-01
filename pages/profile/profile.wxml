@@ -1,0 +1,228 @@
+<view class="container">
+  <view class="profile-card" style="background-color: {{userInfo.backgroundColor || '#FF6B6B'}}">
+    <view class="profile-info">
+      <view class="avatar-wrapper">
+        <view class="avatar-circle">
+          <image wx:if="{{userInfo.avatar && userInfo.avatar.indexOf('http') === 0}}" class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" binderror="onAvatarError" />
+          <text wx:else class="avatar-emoji">{{userInfo.avatar || '👤'}}</text>
+        </view>
+        <view class="online-status"></view>
+      </view>
+      <view class="user-detail">
+        <text class="user-name">{{userInfo.nickname}}</text>
+        <text class="user-signature">{{userInfo.signature || '发现美食，分享快乐'}}</text>
+        <view class="user-location" wx:if="{{userInfo.location}}">
+          <text class="location-icon">📍</text>
+          <text class="location-text">{{userInfo.location}}</text>
+        </view>
+      </view>
+      <view class="edit-btn" bindtap="openEditModal">编辑</view>
+    </view>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-box">
+      <text class="stat-num">{{stats.dynamicLikes}}</text>
+      <text class="stat-name">动态点赞</text>
+    </view>
+    <view class="stat-box">
+      <text class="stat-num">{{stats.dynamicFavorites}}</text>
+      <text class="stat-name">动态收藏</text>
+    </view>
+    <view class="stat-box">
+      <text class="stat-num">{{stats.recipeLikes}}</text>
+      <text class="stat-name">菜谱点赞</text>
+    </view>
+    <view class="stat-box">
+      <text class="stat-num">{{stats.recipeFavorites}}</text>
+      <text class="stat-name">菜谱收藏</text>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-row" bindtap="goToDynamicLikes">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-text">我的动态点赞</text>
+    </view>
+    <view class="menu-row" bindtap="goToDynamicFavorites">
+      <text class="menu-icon">⭐</text>
+      <text class="menu-text">我的动态收藏</text>
+    </view>
+    <view class="menu-row" bindtap="goToRecipeLikes">
+      <text class="menu-icon">👍</text>
+      <text class="menu-text">我的菜谱点赞</text>
+    </view>
+    <view class="menu-row" bindtap="goToRecipeFavorites">
+      <text class="menu-icon">⭐</text>
+      <text class="menu-text">我的菜谱收藏</text>
+    </view>
+    <view class="menu-row" bindtap="goToFollowing">
+      <text class="menu-icon">👥</text>
+      <text class="menu-text">我的关注</text>
+    </view>
+    <view class="menu-row" bindtap="goToFollowers">
+      <text class="menu-icon">👤</text>
+      <text class="menu-text">我的粉丝</text>
+    </view>
+    <view class="menu-row" bindtap="goToAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于</text>
+    </view>
+    <view class="menu-row logout-row" bindtap="logout">
+      <text class="menu-icon">🔄</text>
+      <text class="menu-text">切换账号</text>
+    </view>
+  </view>
+
+  <view class="detail-section" wx:if="{{activeTab === 'following'}}">
+    <view class="section-header">
+      <text class="back-btn" bindtap="backToProfile">‹ 返回</text>
+      <text class="section-title">我的关注</text>
+      <text class="placeholder"></text>
+    </view>
+    <view class="user-list">
+      <view class="user-item" wx:for="{{following}}" wx:key="id">
+        <view class="small-avatar">
+          <image wx:if="{{item.avatar && item.avatar.indexOf('http') === 0}}" class="small-avatar-img" src="{{item.avatar}}" mode="aspectFill" />
+          <text wx:else class="small-avatar-emoji">{{item.avatar || '👤'}}</text>
+        </view>
+        <view class="user-info">
+          <text class="user-name">{{item.name}}</text>
+          <text class="user-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="detail-section" wx:if="{{activeTab === 'followers'}}">
+    <view class="section-header">
+      <text class="back-btn" bindtap="backToProfile">‹ 返回</text>
+      <text class="section-title">我的粉丝</text>
+      <text class="placeholder"></text>
+    </view>
+    <view class="user-list">
+      <view class="user-item" wx:for="{{followers}}" wx:key="id">
+        <view class="small-avatar">
+          <image wx:if="{{item.avatar && item.avatar.indexOf('http') === 0}}" class="small-avatar-img" src="{{item.avatar}}" mode="aspectFill" />
+          <text wx:else class="small-avatar-emoji">{{item.avatar || '👤'}}</text>
+        </view>
+        <view class="user-info">
+          <text class="user-name">{{item.name}}</text>
+          <text class="user-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="favorites-section" wx:if="{{activeTab === 'favorites'}}">
+    <view class="section-header">
+      <text class="back-btn" bindtap="backToProfile">‹ 返回</text>
+      <text class="section-title">我的收藏</text>
+      <text class="placeholder"></text>
+    </view>
+    <view class="favorites-list">
+      <view 
+        class="favorite-item" 
+        wx:for="{{favorites}}" 
+        wx:key="_id"
+        bindtap="goDetail"
+        data-id="{{item._id}}"
+      >
+        <view class="favorite-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}88)">
+          <text class="favorite-emoji">{{item.emoji}}</text>
+        </view>
+        <view class="favorite-info">
+          <text class="favorite-name">{{item.name}}</text>
+          <text class="favorite-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-state" wx:if="{{favorites.length === 0}}">
+      <text class="empty-icon">⭐</text>
+      <text class="empty-text">暂无收藏</text>
+      <text class="empty-hint">去收藏喜欢的菜谱吧</text>
+    </view>
+  </view>
+
+  <view class="modal-overlay" wx:if="{{showEditModal}}" bindtap="hideEditModal">
+    <view class="edit-modal-content" catchtap="stopPropagation">
+      <view class="edit-header">
+        <text class="edit-title">个人信息</text>
+        <text class="edit-close" bindtap="hideEditModal">✕</text>
+      </view>
+      <scroll-view class="edit-body" scroll-y>
+        <view class="form-section">
+          <text class="section-label">头像</text>
+          <view class="avatar-section">
+            <view class="avatar-circle">
+              <image wx:if="{{userInfo.avatar && userInfo.avatar.indexOf('http') === 0}}" class="avatar-img" src="{{userInfo.avatar}}" mode="aspectFill" />
+              <text wx:else class="avatar-emoji">{{userInfo.avatar || '👤'}}</text>
+            </view>
+            <view class="avatar-actions">
+              <view class="action-btn" bindtap="chooseAvatar">
+                <text class="action-icon">📷</text>
+                <text class="action-text">从相册选择</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-section">
+          <text class="section-label">昵称</text>
+          <input class="form-input" placeholder="请输入昵称" value="{{userInfo.nickname}}" data-field="nickname" bindinput="onEditInput" />
+        </view>
+
+        <view class="form-section">
+          <text class="section-label">性别</text>
+          <view class="gender-options">
+            <view 
+              class="gender-item {{userInfo.gender === 'male' ? 'selected' : ''}}" 
+              bindtap="selectGender"
+              data-gender="male"
+            >
+              <view class="radio-circle">
+                <view class="radio-inner" wx:if="{{userInfo.gender === 'male'}}"></view>
+              </view>
+              <text class="gender-icon">👨</text>
+              <text class="gender-text">男</text>
+            </view>
+            <view 
+              class="gender-item {{userInfo.gender === 'female' ? 'selected' : ''}}" 
+              bindtap="selectGender"
+              data-gender="female"
+            >
+              <view class="radio-circle">
+                <view class="radio-inner" wx:if="{{userInfo.gender === 'female'}}"></view>
+              </view>
+              <text class="gender-icon">👩</text>
+              <text class="gender-text">女</text>
+            </view>
+            <view 
+              class="gender-item {{userInfo.gender === '' ? 'selected' : ''}}" 
+              bindtap="selectGender"
+              data-gender=""
+            >
+              <view class="radio-circle">
+                <view class="radio-inner" wx:if="{{userInfo.gender === ''}}"></view>
+              </view>
+              <text class="gender-text">保密</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-section">
+          <text class="section-label">所在地</text>
+          <input class="form-input" placeholder="请输入所在地" value="{{userInfo.location}}" data-field="location" bindinput="onEditInput" />
+        </view>
+
+        <view class="form-section">
+          <text class="section-label">座右铭</text>
+          <textarea class="form-textarea" placeholder="请输入座右铭" value="{{userInfo.signature}}" data-field="signature" bindinput="onEditInput" />
+        </view>
+      </scroll-view>
+      <view class="auto-save-hint">
+        <text class="hint-text">✓ 自动保存中...</text>
+      </view>
+    </view>
+  </view>
+</view>

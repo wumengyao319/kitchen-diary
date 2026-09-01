@@ -1,0 +1,113 @@
+<view class="container">
+  <view class="publish-btn" bindtap="showPublishModal">
+    <text class="publish-icon">+</text>
+    <text class="publish-text">发布</text>
+  </view>
+
+  <view class="dynamic-list">
+    <view class="dynamic-card" wx:for="{{dynamicList}}" wx:key="id">
+      <view class="dynamic-header">
+        <view class="avatar" style="background: linear-gradient(135deg, {{item.avatarColor}}, {{item.avatarColor}}cc)">
+          <text wx:if="{{!item.avatar || item.avatar.indexOf('http') !== 0}}" class="avatar-icon">{{item.avatar || '👤'}}</text>
+          <image wx:else class="avatar-img" src="{{item.avatar}}" mode="aspectFill" />
+        </view>
+        <view class="user-info">
+          <text class="user-name">{{item.userName}}</text>
+          <text class="dynamic-time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="dynamic-content">
+        <text class="dynamic-text">{{item.content}}</text>
+      </view>
+      <view class="dynamic-imgs" wx:if="{{item.images && item.images.length}}">
+        <image wx:for="{{item.images}}" wx:for-item="img" wx:key="*this" class="dynamic-img" src="{{img}}" mode="aspectFill" />
+      </view>
+      <view class="rx-link" wx:if="{{item.isRecipe}}" bindtap="goRecipe" data-rid="{{item.recipeId}}">查看完整菜谱「{{item.recipeName}}」→</view>
+      <view class="del-mine" wx:if="{{item.isMine}}" bindtap="deleteMine" data-id="{{item.id}}">删除</view>
+      <view class="dynamic-stats">
+        <view class="stat-item" bindtap="like" data-id="{{item.id}}">
+          <text class="stat-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+          <text class="stat-text">{{item.likes}}</text>
+        </view>
+        <view class="stat-item" bindtap="showComment" data-id="{{item.id}}">
+          <text class="stat-icon">💬</text>
+          <text class="stat-text">{{item.comments}}</text>
+        </view>
+        <view class="stat-item" bindtap="collect" data-id="{{item.id}}">
+          <text class="stat-icon">{{item.isCollected ? '⭐' : '☆'}}</text>
+          <text class="stat-text">收藏</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-overlay" wx:if="{{showModal}}" bindtap="hidePublishModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">发布动态</text>
+        <text class="modal-close" bindtap="hidePublishModal">✕</text>
+      </view>
+      <view class="modal-body">
+        <textarea 
+          class="publish-textarea" 
+          placeholder="分享你的美食心得..." 
+          value="{{publishContent}}"
+          bindinput="onPublishInput"
+        />
+        <view class="upload-area">
+          <view class="upload-label">图片</view>
+          <view class="upload-list">
+            <view 
+              class="upload-item" 
+              wx:for="{{uploadImages}}" 
+              wx:key="index"
+            >
+              <image src="{{item}}" mode="aspectFill" class="upload-image" />
+              <view class="upload-delete" bindtap="deleteImage" data-index="{{index}}">✕</view>
+            </view>
+            <view class="upload-add" bindtap="chooseImage" wx:if="{{uploadImages.length < 9}}">
+              <text class="add-icon">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="cancel-btn" bindtap="hidePublishModal">取消</view>
+        <view class="publish-btn-modal" bindtap="publish">发布</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-overlay" wx:if="{{showCommentModal}}" bindtap="hideCommentModal">
+    <view class="comment-modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">评论</text>
+        <text class="modal-close" bindtap="hideCommentModal">✕</text>
+      </view>
+      <scroll-view class="comment-list" scroll-y>
+        <view class="comment-item" wx:for="{{comments[currentDynamicId]}}" wx:key="id">
+          <view class="comment-avatar">👤</view>
+          <view class="comment-content">
+            <view class="comment-header">
+              <text class="comment-name">{{item.userName}}</text>
+              <text class="comment-time">{{item.time}}</text>
+            </view>
+            <text class="comment-text">{{item.content}}</text>
+          </view>
+        </view>
+        <view class="no-comment" wx:if="{{!comments[currentDynamicId] || comments[currentDynamicId].length === 0}}">
+          <text>暂无评论，快来发表第一条评论吧~</text>
+        </view>
+      </scroll-view>
+      <view class="comment-input-area">
+        <input 
+          class="comment-input" 
+          placeholder="输入评论..." 
+          value="{{commentContent}}"
+          bindinput="onCommentInput"
+        />
+        <view class="send-btn" bindtap="submitComment">发送</view>
+      </view>
+    </view>
+  </view>
+</view>

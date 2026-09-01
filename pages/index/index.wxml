@@ -1,0 +1,85 @@
+<view class="container">
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots autoplay circular interval="4000">
+      <swiper-item>
+        <view class="banner-card banner-1">
+          <view class="banner-inner">
+            <text class="banner-emoji">🍳</text>
+            <text class="banner-title">今日美食推荐</text>
+            <text class="banner-subtitle">红烧肉、番茄炒蛋、宫保鸡丁</text>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="banner-card banner-2">
+          <view class="banner-inner">
+            <text class="banner-emoji">🥗</text>
+            <text class="banner-title">健康营养食谱</text>
+            <text class="banner-subtitle">低脂低卡，吃出好身材</text>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="banner-card banner-3">
+          <view class="banner-inner">
+            <text class="banner-emoji">🍰</text>
+            <text class="banner-title">美味甜品时光</text>
+            <text class="banner-subtitle">提拉米苏、芒果布丁、蛋糕</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门菜谱</text>
+      <text class="section-more" bindtap="goCategory">查看更多</text>
+    </view>
+    <view class="recipe-list">
+      <view 
+        class="recipe-card" 
+        wx:for="{{hotList}}" 
+        wx:key="_id"
+        bindtap="goDetail"
+        data-id="{{item._id}}"
+      >
+        <view class="recipe-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}88)">
+          <text class="recipe-emoji">{{item.emoji}}</text>
+        </view>
+        <view class="recipe-content">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-desc">{{item.desc}}</text>
+          <text class="recipe-tag">{{item.category}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🏷️ 快速分类</text>
+    </view>
+    <view class="category-grid">
+      <view 
+        class="category-item" 
+        wx:for="{{quickCategories}}" 
+        wx:key="name"
+        bindtap="goCategory"
+        data-name="{{item.name}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section lucky-section" bindtap="goLucky">
+    <text class="lucky-icon">🎲</text>
+    <view class="lucky-info">
+      <text class="lucky-title">幸运抽签</text>
+      <text class="lucky-desc">让AI为你推荐今日菜谱</text>
+    </view>
+    <text class="lucky-arrow">›</text>
+  </view>
+</view>

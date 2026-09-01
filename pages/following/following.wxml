@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="header">
+    <text class="back-btn" bindtap="goBack">‹</text>
+    <text class="header-title">我的关注</text>
+    <text class="placeholder"></text>
+  </view>
+  <scroll-view class="list" scroll-y>
+    <view class="list-item" wx:for="{{list}}" wx:key="id">
+      <view class="avatar" style="background-color: {{item.avatarColor}}">
+        <text wx:if="{{!item.avatar || item.avatar.indexOf('http') !== 0}}">{{item.avatar || '👤'}}</text>
+        <image wx:else class="avatar-img" src="{{item.avatar}}" mode="aspectFill" />
+      </view>
+      <view class="info">
+        <text class="name">{{item.name}}</text>
+        <text class="desc">{{item.desc}}</text>
+      </view>
+      <view class="action">
+        <text class="btn {{item.isFollowed ? 'followed' : 'unfollowed'}}" bindtap="toggleFollow" data-id="{{item.id}}">
+          {{item.isFollowed ? '已关注' : '未关注'}}
+        </text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

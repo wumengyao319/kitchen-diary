@@ -1,0 +1,65 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">🎲 幸运抽签</text>
+    <text class="header-desc">让AI为你推荐今日菜谱</text>
+  </view>
+
+  <view class="wheel-section">
+    <view class="wheel">
+      <text class="wheel-icon">{{wheelIcon}}</text>
+      <text class="wheel-label">{{wheelLabel}}</text>
+    </view>
+    
+    <view class="spin-btn" bindtap="spin" wx:if="{{!isSpinning}}">
+      <text class="spin-text">开始抽签</text>
+    </view>
+    <view class="spin-btn spinning" wx:else>
+      <text class="spin-text">抽签中...</text>
+    </view>
+  </view>
+
+  <view class="result-section" wx:if="{{showResult}}">
+    <view class="result-card">
+      <view class="result-image" style="background: linear-gradient(135deg, {{resultRecipe.color}}, {{resultRecipe.color}}cc)">
+        <text class="result-emoji">{{resultRecipe.emoji}}</text>
+      </view>
+      <text class="result-name">{{resultRecipe.name}}</text>
+      <text class="result-desc">{{resultRecipe.desc}}</text>
+      <view class="result-meta">
+        <text class="meta-item">{{resultRecipe.cookTime}}</text>
+        <text class="meta-item">{{resultRecipe.difficulty}}</text>
+      </view>
+      <view class="result-actions">
+        <text class="action-btn" bindtap="spinAgain">再抽一次</text>
+        <text class="action-btn primary" bindtap="goDetail" data-id="{{resultRecipe._id}}">查看菜谱</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-header">
+      <text class="section-title">历史记录</text>
+      <text class="clear-history" bindtap="clearHistory" wx:if="{{history.length > 0}}">清空</text>
+    </view>
+    <view class="history-list" wx:if="{{history.length > 0}}">
+      <view 
+        class="history-item" 
+        wx:for="{{history}}" 
+        wx:key="index"
+        bindtap="goDetail"
+        data-id="{{item._id}}"
+      >
+        <view class="history-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}88)">
+          <text class="history-emoji">{{item.emoji}}</text>
+        </view>
+        <view class="history-info">
+          <text class="history-name">{{item.name}}</text>
+          <text class="history-time">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="no-history" wx:else>
+      <text class="no-history-text">暂无抽签记录</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,399 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.search-header {
+  padding: 24rpx;
+  padding-top: calc(24rpx + env(safe-area-inset-top));
+  background-color: #ffffff;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background-color: #ffffff;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: #ff6b6b;
+}
+
+.daily-recommend {
+  background-color: #ffffff;
+  margin-top: 16rpx;
+}
+
+.daily-dish {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  margin: 0 24rpx 24rpx;
+  background: linear-gradient(135deg, #fff5f5, #fff);
+  border-radius: 20rpx;
+}
+
+.daily-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.daily-emoji {
+  font-size: 72rpx;
+}
+
+.daily-info {
+  flex: 1;
+}
+
+.daily-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.daily-desc {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.hot-search {
+  background-color: #ffffff;
+  margin-top: 16rpx;
+}
+
+.hot-scroll {
+  white-space: nowrap;
+  padding: 0 24rpx 24rpx;
+}
+
+.hot-list {
+  display: inline-flex;
+  gap: 20rpx;
+}
+
+.hot-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160rpx;
+}
+
+.hot-image {
+  position: relative;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.hot-emoji {
+  font-size: 56rpx;
+}
+
+.hot-rank {
+  position: absolute;
+  bottom: -8rpx;
+  right: -8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #ff6b6b;
+}
+
+.hot-rank:nth-child(2) {
+  background-color: #ffa502;
+}
+
+.hot-rank:nth-child(3) {
+  background-color: #ffa07a;
+}
+
+.hot-name {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 16rpx 24rpx;
+}
+
+.search-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.clear-btn {
+  font-size: 28rpx;
+  color: #999999;
+  padding: 8rpx;
+}
+
+.hot-tags {
+  padding: 24rpx;
+  background-color: #ffffff;
+  margin-top: 16rpx;
+}
+
+.tags-title {
+  font-size: 26rpx;
+  color: #999999;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #f5f5f5;
+  color: #666666;
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.tag.selected {
+  background-color: #ff6b6b;
+  color: #ffffff;
+}
+
+.selected-tags {
+  padding: 16rpx 24rpx;
+  background-color: #ffffff;
+  margin-top: 16rpx;
+}
+
+.selected-title {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selected-tag {
+  display: flex;
+  align-items: center;
+  background-color: #ff6b6b;
+  color: #ffffff;
+  padding: 10rpx 16rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  margin-right: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.selected-tag .remove {
+  margin-left: 8rpx;
+  font-size: 20rpx;
+}
+
+.clear-all {
+  font-size: 24rpx;
+  color: #999999;
+  padding: 10rpx 16rpx;
+}
+
+.search-result {
+  margin-top: 16rpx;
+}
+
+.result-header {
+  padding: 16rpx 24rpx;
+  background-color: #ffffff;
+}
+
+.result-count {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.recipe-list {
+  padding: 16rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.recipe-item {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.recipe-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.recipe-emoji {
+  font-size: 56rpx;
+}
+
+.recipe-info {
+  flex: 1;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recipe-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.recipe-desc {
+  font-size: 24rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-ingredients {
+  display: flex;
+  align-items: center;
+}
+
+.ingredients-label {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.ingredients {
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+  background-color: #ffffff;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #666666;
+  margin-bottom: 12rpx;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.history-section {
+  margin-top: 16rpx;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background-color: #ffffff;
+}
+
+.history-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.clear-history {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.history-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16rpx 24rpx;
+  background-color: #ffffff;
+}
+
+.history-item {
+  background-color: #f5f5f5;
+  color: #666666;
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.no-history {
+  padding: 40rpx;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.no-history-text {
+  font-size: 26rpx;
+  color: #999999;
+}

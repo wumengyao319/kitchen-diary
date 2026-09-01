@@ -1,0 +1,84 @@
+<scroll-view scroll-y class="detail-scroll">
+  <view class="recipe-header">
+    <view class="recipe-image" style="background: linear-gradient(135deg, {{recipe.color}}, {{recipe.color}}88)">
+      <text class="recipe-emoji">{{recipe.emoji}}</text>
+    </view>
+    <view class="recipe-info">
+      <text class="recipe-name">{{recipe.name}}</text>
+      <text class="recipe-desc">{{recipe.desc}}</text>
+      <view class="recipe-meta">
+        <view class="meta-item">
+          <text class="meta-icon">🏷️</text>
+          <text class="meta-text">{{recipe.category}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-icon">⏱️</text>
+          <text class="meta-text">{{recipe.cookTime}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-icon">👨🍳</text>
+          <text class="meta-text">{{recipe.difficulty}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-icon">🍽️</text>
+          <text class="meta-text">{{recipe.servings}}人份</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">食材清单</text>
+      <text class="section-count">{{recipe.ingredients && recipe.ingredients.length || 0}}种食材</text>
+    </view>
+    <view class="ingredients-grid">
+      <view class="ingredient-item" wx:for="{{recipe.ingredients}}" wx:key="index">
+        <text class="ingredient-name">{{item.name}}</text>
+        <text class="ingredient-amount">{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">烹饪步骤</text>
+      <text class="section-count">{{recipe.steps && recipe.steps.length || 0}}步</text>
+    </view>
+    <view class="steps-list">
+      <view class="step-item" wx:for="{{recipe.steps}}" wx:key="index">
+        <view class="step-number">{{index + 1}}</view>
+        <view class="step-content">
+          <text class="step-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">小贴士</text>
+    </view>
+    <view class="tips-box">
+      <text class="tips-content">{{recipe.tips}}</text>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bottom-bar">
+  <view class="bar-item" bindtap="toggleFavorite">
+    <text class="bar-icon">{{isFavorite ? '⭐' : '☆'}}</text>
+    <text class="bar-text">{{isFavorite ? '已收藏' : '收藏'}}</text>
+  </view>
+  <view class="bar-item" bindtap="shareRecipe">
+    <text class="bar-icon">📤</text>
+    <text class="bar-text">分享</text>
+  </view>
+  <view class="bar-item" bindtap="toggleLike">
+    <text class="bar-icon">{{isLiked ? '❤️' : '🤍'}}</text>
+    <text class="bar-text">{{isLiked ? '已点赞' : '点赞'}}</text>
+  </view>
+  <view class="bar-action" bindtap="startCooking">
+    <text class="action-text">👩🍳 开始烹饪</text>
+  </view>
+</view>

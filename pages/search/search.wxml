@@ -1,0 +1,128 @@
+<view class="container">
+  <view class="search-header">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="输入食材名称搜索" value="{{searchKey}}" bindinput="onSearch" bindconfirm="doSearch"/>
+      <text class="clear-btn" wx:if="{{searchKey}}" bindtap="clearSearch">✕</text>
+    </view>
+  </view>
+
+  <view class="daily-recommend" wx:if="{{!searchKey && selectedTags.length === 0 && dailyRecommend.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">🌟 每日推荐</text>
+    </view>
+    <view 
+      class="daily-dish"
+      bindtap="goDetail"
+      data-id="{{dailyRecommend[0]._id}}"
+    >
+      <view class="daily-image" style="background: linear-gradient(135deg, {{dailyRecommend[0].color}}, {{dailyRecommend[0].color}}cc)">
+        <text class="daily-emoji">{{dailyRecommend[0].emoji}}</text>
+      </view>
+      <view class="daily-info">
+        <text class="daily-name">{{dailyRecommend[0].name}}</text>
+        <text class="daily-desc">今日为您推荐这道菜，快来试试吧~</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="hot-search" wx:if="{{!searchKey && selectedTags.length === 0}}">
+    <view class="section-header">
+      <text class="section-title">🔥 热门菜谱</text>
+    </view>
+    <scroll-view class="hot-scroll" scroll-x>
+      <view class="hot-list">
+        <view 
+          class="hot-item" 
+          wx:for="{{hotRecipes}}" 
+          wx:key="_id"
+          bindtap="goDetail"
+          data-id="{{item._id}}"
+        >
+          <view class="hot-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}88)">
+            <text class="hot-emoji">{{item.emoji}}</text>
+            <view class="hot-rank">{{item.rank}}</view>
+          </view>
+          <text class="hot-name">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="hot-tags">
+    <text class="tags-title">🥘 热门食材</text>
+    <view class="tags-list">
+      <text 
+        class="tag {{selectedTags.includes(item) ? 'selected' : ''}}" 
+        wx:for="{{hotTags}}" 
+        wx:key="index"
+        bindtap="toggleTag"
+        data-tag="{{item}}"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <view class="selected-tags" wx:if="{{selectedTags.length > 0}}">
+    <text class="selected-title">已选食材：</text>
+    <view class="selected-list">
+      <view class="selected-tag" wx:for="{{selectedTags}}" wx:key="index">
+        <text>{{item}}</text>
+        <text class="remove" bindtap="removeTag" data-index="{{index}}">✕</text>
+      </view>
+      <text class="clear-all" bindtap="clearTags">清空</text>
+    </view>
+  </view>
+
+  <view class="search-result" wx:if="{{searchKey || selectedTags.length > 0}}">
+    <view class="result-header">
+      <text class="result-count">找到 {{recipes.length}} 道菜</text>
+    </view>
+    
+    <view class="recipe-list" wx:if="{{recipes.length > 0}}">
+      <view 
+        class="recipe-item" 
+        wx:for="{{recipes}}" 
+        wx:key="_id"
+        bindtap="goDetail"
+        data-id="{{item._id}}"
+      >
+        <view class="recipe-image" style="background: linear-gradient(135deg, {{item.color}}, {{item.color}}88)">
+          <text class="recipe-emoji">{{item.emoji}}</text>
+        </view>
+        <view class="recipe-info">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-desc">{{item.desc}}</text>
+          <view class="recipe-ingredients">
+            <text class="ingredients-label">食材：</text>
+            <text class="ingredients">{{item.ingredients.join('、')}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:else>
+      <text class="empty-icon">🍳</text>
+      <text class="empty-text">暂无匹配的菜谱</text>
+      <text class="empty-hint">试试其他食材吧</text>
+    </view>
+  </view>
+
+  <view class="history-section" wx:if="{{!searchKey && selectedTags.length === 0}}">
+    <view class="history-header">
+      <text class="history-title">📖 搜索历史</text>
+      <text class="clear-history" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-list" wx:if="{{searchHistory.length > 0}}">
+      <text 
+        class="history-item" 
+        wx:for="{{searchHistory}}" 
+        wx:key="index"
+        bindtap="searchHistoryItem"
+        data-key="{{item}}"
+      >{{item}}</text>
+    </view>
+    <view class="no-history" wx:else>
+      <text class="no-history-text">暂无搜索记录</text>
+    </view>
+  </view>
+</view>

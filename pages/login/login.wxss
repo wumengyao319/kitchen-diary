@@ -1,0 +1,150 @@
+page {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.logo {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+}
+
+.app-name {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.app-desc {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.form-section {
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15);
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.form-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 36rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 24rpx;
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.input-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.input-field {
+  flex: 1;
+  height: 88rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.form-options {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-box {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.checkbox-box.checked {
+  background: #FF6B6B;
+  border-color: #FF6B6B;
+}
+
+.checkbox-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.login-btn {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  border: none;
+}
+
+.link-section {
+  text-align: center;
+}
+
+.link-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.register-btn {
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #667EEA, #764BA2);
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+}
